@@ -34,24 +34,63 @@ int main()
   return 0;
 }
 
-
-int EnRotateWithMessAndAmount()
+// This is the function that encrypts a given message and with a rotation cypher which changes the amount by a given number
+int EncryptRotateWithMessAndAmount(message,key)
 {
-    char message[];     // the array to store the message into
-    char character;     // wherer the letters will be stored once they have gone into the array
-    int i;              // shows the postion in the array
-    int key;            // stores the key that has been input
     
-    printf("Enter a message to Encrypt: \n");
-    scanf("%c", &message);
-    printf("Please enter your key: \n");
-    scanf("%d",&key);
-    
-    for (i=0; message[i]; ++i)
-    {
-        character = message[i];      //stores the readed letter from message into character
-        
-        if(character >=)
-    }
-    
+	char message[100], character;
+	int i, key;
+	
+	for(i = 0; message[i] != '\0'; ++i){
+		character = message[i];
+		
+		if(character >= 'a' && character <= 'z'){
+			character = character + key;
+			
+			if(character > 'z'){
+				character = character - 'z' + 'a' - 1;
+			}
+			
+			message[i] = character;
+		}
+		else if(ch >= 'A' && ch <= 'Z'){
+			character = character + key;
+			
+			if(ch > 'Z'){
+				character = character - 'Z' + 'A' - 1;
+			}
+			
+			message[i] = character;
+		}
+	}
+	return message[i];    
 }
+
+int DecryptRotaionWithMessAndAmount()
+{
+    char message[100], character;
+	int i, key;
+	
+	
+	for(i = 0; message[i] != '\0'; ++i){
+		character = message[i];
+		
+		if(character >= 'a' && character <= 'z'){
+			character = character - key;
+			
+			if(ch < 'a'){
+				character = character + 'z' - 'a' + 1;
+			}
+			
+			message[i] = character;
+		}
+		else if(character >= 'A' && character <= 'Z'){
+			character = character - key;
+			
+			if(character < 'A'){
+				character = character + 'Z' - 'A' + 1;
+			}
+			
+			message[i] = character;
+			}
+		return message[i];
