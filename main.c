@@ -16,7 +16,7 @@ d(c) = (c − k)(mod 26)*/
  3) Encryption using a substituion ciper given message and alphabet substition
  4) Decrypt an encrypted message using substituion given cipher text and substition
  5) Decrypt an encrypted message with a rotation cyper given text ony
- 6) decrypt an encrypted message with a substituion cipher text only
+ 6) decrypt an encrypted message with a substituion cypher text only
  */
 
 //https://www.thecrazyprogrammer.com/2016/11/caesar-cipher-c-c-encryption-decryption.html
@@ -24,29 +24,72 @@ d(c) = (c − k)(mod 26)*/
 
 
 
-#include <stdio>
+#include <stdio.h>
 
 
 
 int main()
 {
     
+    FILE *text;
+    text = fopen("data.txt","r");
+    if(text == NULL)
+            perror("fopen()");
+    
+    //char message[1000];
+   // int key;
+   char choice;         //Where the users choice will be storeded for menu
+    
+    
+    //This is the user menu for choosing the way they want there message to be encrypted or decrypted
+    printf("Please select a the way you want your encryption or decryption to be done\n");
+    printf("a) Encryption with a rotaion cipher given message and roation amount\n");
+    printf("b) decryption of an encrypted message with a rotation cipher text and rotaion amount\n");
+    printf("c) Encryption using a substituion cipher with a given message and alphabet substition\n");
+    printf("d) Decrypt an encrypted message using substituion given cipher text and substition\n");
+    printf("e) Decrypt an encrypted message with a rotation cipher given text only\n");
+    printf("f) decrypt an encrypted message with a substituion cipher text only\n");
+    //scans the user input letter and places it into choice
+    scanf("%c", &choice);
+    
+    switch(choice)
+    {
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
+        case 'e':
+        case 'f':
+        default: printf("Incorrect option choice %c\nPlease enter a, b, c, d, e, or f as your choice\n", choice); // if the selection is incorrect this will tell the user to tell them there options they can choose to use 
+    }
+
+ 
+ 
+ 
+
+ 
 
   return 0;
 }
 
-// This is the function that encrypts a given message and with a rotation cypher which changes the amount by a given number
-int EncryptRotateWithMessAndAmount(message,key)
+
+
+
+
+// This is the function that encrypts a given message and with a rotation cipher which changes the amount by a given number
+int EncryptRotateWithMessAndAmount()
 {
     
-	char message[100], character;
-	int i, key;
+	char message[1000];
+	char character;
+	int i;
+	int keyRotate;
 	
 	for(i = 0; message[i] != '\0'; ++i){
 		character = message[i];
 		
 		if(character >= 'a' && character <= 'z'){
-			character = character + key;
+			character = character + keyRotate;
 			
 			if(character > 'z'){
 				character = character - 'z' + 'a' - 1;
@@ -54,10 +97,10 @@ int EncryptRotateWithMessAndAmount(message,key)
 			
 			message[i] = character;
 		}
-		else if(ch >= 'A' && ch <= 'Z'){
-			character = character + key;
+		else if(character >= 'A' && character <= 'Z'){
+			character = character + keyRotate;
 			
-			if(ch > 'Z'){
+			if(character > 'Z'){
 				character = character - 'Z' + 'A' - 1;
 			}
 			
@@ -67,31 +110,43 @@ int EncryptRotateWithMessAndAmount(message,key)
 	return message[i];    
 }
 
+
+//This function dycrypts a given message with a roatation cipher if the key is also known
+
 int DecryptRotaionWithMessAndAmount()
 {
-    char message[100], character;
-	int i, key;
+    char message[1000], character;
+	int i, Rotatekey;
 	
 	
-	for(i = 0; message[i] != '\0'; ++i){
+	for(i = 0; message[i] != '\0'; ++i)
+	{
 		character = message[i];
 		
-		if(character >= 'a' && character <= 'z'){
-			character = character - key;
+		if(character >= 'a' && character <= 'z')
+		{
+			character = character - Rotatekey;
 			
-			if(ch < 'a'){
+			if(character < 'a')
 				character = character + 'z' - 'a' + 1;
-			}
+			else
+			    message[i] = character;
+	    }
+
+		else if(character >= 'A' && character <= 'Z')
+		{
+			character = character - Rotatekey;
 			
+			if(character < 'A')
+				character = character + 'Z' - 'A' + 1;
+			
+			
+			else
 			message[i] = character;
 		}
-		else if(character >= 'A' && character <= 'Z'){
-			character = character - key;
-			
-			if(character < 'A'){
-				character = character + 'Z' - 'A' + 1;
-			}
-			
-			message[i] = character;
-			}
+    }
+
+		
 		return message[i];
+}
+	
