@@ -146,7 +146,7 @@ int DecryptRotaionWithMessAndAmount()
 		}
     }
 
-		
+		//
 		return message[i];
 }
 	
